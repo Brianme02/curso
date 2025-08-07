@@ -3,6 +3,8 @@
 @section('title', 'Cursos Create')
 
 @section('content')
-    <h1>En esta pagina podras crear un curso</h1>
+    <h1>En esta pagina podras crear un curso
+        Hola mundo
+    </h1>
 @endsection
 
