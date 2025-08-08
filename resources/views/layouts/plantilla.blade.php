@@ -9,3 +9,4 @@
    @yield('content')
 </body>
 </html>
+
