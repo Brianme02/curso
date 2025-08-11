@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         //
-        $cuestionario='cuestionario_cursos';
-        Schema::create($cuestionario, function (Blueprint $table) {
+        $preguntas = 'preguntas';
+        Schema::create($preguntas, function (Blueprint $table) {
             $table->id();
-            $table->string('tiulo');
-            $table->bigInteger('curso_id')->unsigned();
-            $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('pregunta');
+            $table->bigInteger('cuestionario_id')->unsigned();
+            $table->foreign('cuestionario_id')->references('id')->on('cuestionarios')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */

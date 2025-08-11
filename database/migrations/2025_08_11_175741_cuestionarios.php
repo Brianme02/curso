@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $preguntas = 'preguntas_cuestionario';
-        Schema::create($preguntas, function (Blueprint $table) {
+        //
+        $cuestionario='cuestionarios';
+        Schema::create($cuestionario, function (Blueprint $table) {
             $table->id();
-            $table->string('pregunta');
-            $table->bigInteger('cuestionario_id')->unsigned();
-            $table->foreign('cuestionario_id')->references('id')->on('cuestionario_cursos')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('titulo');
+            $table->bigInteger('curso_id')->unsigned();
+            $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
