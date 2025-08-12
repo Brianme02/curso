@@ -15,8 +15,7 @@ class CursoController extends Controller
  
 
         return view('cursos.index', compact('cursos'));
-        // Si no necesitas las preguntas y cuestionarios, puedes eliminarlos de la consulta
-        //return view('cursos.index', compact('cursos'));//
+        
     }
 
     public function create()
