@@ -20,9 +20,9 @@
                         
                 </li>
             @endforeach
-
+            
         </ul>
-
+        <a href="{{ route('cursos.modCuestionario', $curso->id) }}">Modificar Cuestionario</a>
     @else
         <p>No hay cuestionarios disponibles para este curso.</p>
 

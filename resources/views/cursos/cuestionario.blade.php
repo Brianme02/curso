@@ -6,7 +6,7 @@
 
     <h1>Cuestionario del Curso {{$curso->name}}</h1>
 
-    <form action="{{ route('cursos.cuestionario', $curso->id) }}" method="POST">
+    <form id="BME" action="{{ route('cursos.cuestionario', $curso->id) }}" method="POST">
         @csrf
          
 
@@ -27,5 +27,37 @@
     </form>
 
     <a href="{{ route('cursos.index', $curso->id) }}">Volver a Cursos</a>
+
+    <script>
+document.getElementById('BME').addEventListener('submit', function(e) {
+    e.preventDefault(); // Evitamos el envío del formulario
+
+    // Conversión del form para enviarlo en la petición
+    const formData = new FormData(this);
+
+    const token = formData.get('_token');
+
+    fetch(this.action, {
+        method: this.method, //Utiliza el método del form
+        headers: {
+            'X-CSRF-TOKEN': token //Envía el token único de la sesión
+        },
+        body: formData // Pasa los datos del form al request
+    })
+    .then(response => {
+        const status = response.status; //Obtiene el estado de la respuesta
+        return response.json().then(data => ({ status, data })); 
+    })
+    .then(({ status, data }) => {
+        alert(data.message); // Mostramos mensaje del backend
+	
+//Redirige si el status fue 2xx (OK)
+        if (status >= 200 && status < 300) {
+            window.history.back();
+        }
+    })
+    .catch(error => alert('No se pudo completar la solicitud')); //Error genérico
+});
+</script>
 
 @endsection
