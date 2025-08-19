@@ -22,10 +22,10 @@ Route::get('cursos/{id}', [CursoController::class,'show'])->name('cursos.show');
 Route::post('cursos',[CursoController::class,'store'])->name('cursos.store');
 Route::get('curso/{id}/cuestionario', [CursoController::class,'cuestionario'])->name('cursos.cuestionario');
 Route::post('curso/{id}/cuestionario', [CursoController::class,'guardarCuestionario'])->name('cursos.guardarCuestionario');
-Route::get('cursos/{id}/ModificarCuestionario',[CursoController::class,'modCuestionario'])->name('cursos.modCuestionario');
-Route::get('cursos/{id}/ModificarPregunta',[CursoController::class,'modPregunta'])->name('cursos.modPregunta');
-Route::put('curso/{id}/ModificarPregunta', [CursoController::class, 'update'])->name('preguntas.update');
-Route::delete('curso/{id}/ModificarCuestionario', [CursoController::class, 'destroy'])->name('preguntas.destroy');
+Route::get('cursos/{id}/Cuestionario/Modificar',[CursoController::class,'modCuestionario'])->name('cursos.modCuestionario');
+Route::get('cursos/{id}/Cuestionario/ModificarPregunta',[CursoController::class,'modPregunta'])->name('cursos.modPregunta');
+Route::put('curso/{id}/', [CursoController::class, 'update'])->name('preguntas.update');
+Route::delete('curso/{id}', [CursoController::class, 'destroy'])->name('preguntas.destroy');
 
 
 
