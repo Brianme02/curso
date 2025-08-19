@@ -23,7 +23,7 @@ class CursoController extends Controller
             return view('cursos.index', compact('cursos'));
         } catch (\Exception $e) {
             Log::error('Error al obtener los cursos: ' . $e->getMessage());
-            return response()->json()->route('cursos.index')->withErrors('Error al cargar los cursos.');
+            return redirect('cursos.index')->withErrors('Error al cargar los cursos.');
         }
     }
 
@@ -49,16 +49,22 @@ class CursoController extends Controller
                 $curso->categoria = $request->categoria;
 
                 $curso->save();
-                return redirect()->route('cursos.show', $curso->id);
+                return response()->json([
+                    'message' => 'Mensaje de éxito'
+                ], 200);
             });
             //return redirect()->route('cursos.show', $curso);
         } catch (ValidationException $e) {
             Log::error('' . json_encode($e->errors()));
 
-            return redirect()->back()->with('error', '');
+            return response()->json([
+                'message' => 'Mensaje de error'
+            ], 500);
         } catch (Exception $e) {
             LOG::ERROR('' . $e->getMessage());
-            return redirect()->back()->with('error');
+            return response()->json([
+                'message' => 'Mensaje de error'
+            ], 500);
         }
     }
 
@@ -143,19 +149,21 @@ class CursoController extends Controller
                 $pregunta = Preguntas::where('cuestionario_id', $cuestionario->id)->firstOrFail();
             });
 
-
+            return response()->json([
+                'message' => 'Mensaje de éxito'
+            ], 200);
             //Log::info($curso);
         } catch (ValidationException $e) {
             Log::error('' . json_encode($e->errors()));
 
             return response()->json([
-                'message' => 'Mensaje de éxito'
-            ], 200);
+                'message' => 'Mensaje de error'
+            ], 500);
         } catch (Exception $e) {
             LOG::ERROR('' . $e->getMessage());
             return response()->json([
-                'message' => 'Mensaje de éxito'
-            ], 200);
+                'message' => 'Mensaje de error'
+            ], 500);
         }
 
 
@@ -189,13 +197,20 @@ class CursoController extends Controller
                 $pregunta->pregunta = $request->texto;
                 $pregunta->save();
             });
+            return response()->json([
+                'message' => 'Mensaje de éxito'
+            ], 200);
         } catch (ValidationException $e) {
             Log::error('' . json_encode($e->errors()));
 
-            return redirect()->back()->with('error', '');
+            return response()->json([
+                'message' => 'Mensaje de error'
+            ], 500);
         } catch (Exception $e) {
             LOG::ERROR('' . $e->getMessage());
-            return redirect()->back()->with('error', '');
+            return response()->json([
+                'message' => 'Mensaje de error'
+            ], 500);
         }
 
         // Redireccionar o responder
@@ -225,17 +240,20 @@ class CursoController extends Controller
                     Log::info('Cuestionario eliminado: ' . $cuestionario->id);
                 }
             });
+            return response()->json([
+                'message' => 'Mensaje de éxito'
+            ], 200);
         } catch (ValidationException $e) {
             Log::error('' . json_encode($e->errors()));
 
-            return redirect()->back()->with('error', '');
+            return response()->json([
+                'message' => 'Mensaje de error'
+            ], 500);
         } catch (Exception $e) {
             LOG::ERROR('' . $e->getMessage());
-            return redirect()->back()->with('error', '');
+            return response()->json([
+                'message' => 'Mensaje de error'
+            ], 500);
         }
-        // Redireccionar o responder
-
-        return redirect()->route('cursos.index');
-
     }
 }
