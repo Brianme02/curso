@@ -34,7 +34,8 @@
 
             // Conversión del form para enviarlo en la petición
             const formData = new FormData(this);
-
+            submitButton = this.querySelector('button[type="submit"]');
+            submitButton.disabled = true; // Deshabilita el botón para evitar múltiples envíos
             const token = formData.get('_token');
             const method = formData.get('_method');
             console.log(formData);
@@ -63,9 +64,13 @@
                     if (status >= 200 && status < 300) {
                         window.location.href = "{{ route('cursos.show', $curso) }}";
                     }
+                    submitButton.disabled = false; // Habilita el botón nuevamente
                 })
-                .catch(error => alert('No se pudo completar la solicitud')); //Error genérico
-
+                .catch(error => 
+                {alert('No se pudo completar la solicitud')
+                submitButton.disabled = false; // Habilita el botón nuevamente
+                }); //Error genérico
+            submitButton.disabled = false; // Habilita el botón nuevamente
         });
     </script>
 
