@@ -13,17 +13,20 @@
                 <strong>{{ $pregunta->pregunta }}</strong>
                 <br>
                 <a href="{{ route('cursos.modPregunta', ['id' => $curso->id, 'pregunta_id' => $pregunta->id]) }}">Modificar
-                    Pregunta</a>
+                    Pregunta
+                </a>
 
                 <form action="{{ route('preguntas.destroy', $pregunta->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit"
-                        onclick="return confirm('¿Estás seguro de eliminar esta pregunta?');">Eliminar</button>
+                        onclick="return confirm('¿Estás seguro de eliminar esta pregunta?');">Eliminar
+                    </button>
                 </form>
 
 
             </li>
+            <a href="{{route('cursos.show',$curso->id)}}" class="btn btn-primary">Volver al curso</a>
         @endforeach
 
     </ul>
